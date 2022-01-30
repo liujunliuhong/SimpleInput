@@ -7,45 +7,83 @@
 
 import UIKit
 
-@objc public protocol LimitedTextfieldDelegate: NSObjectProtocol {
-    @objc optional func textFieldShouldBeginEditing(_ textField: LimitedTextfield) -> Bool
+public protocol LimitedTextfieldDelegate: NSObjectProtocol {
+    func textFieldShouldBeginEditing(_ textField: LimitedTextfield) -> Bool
     
-    @objc optional func textFieldDidBeginEditing(_ textField: LimitedTextfield)
+    func textFieldDidBeginEditing(_ textField: LimitedTextfield)
     
-    @objc optional func textFieldShouldEndEditing(_ textField: LimitedTextfield) -> Bool
+    func textFieldShouldEndEditing(_ textField: LimitedTextfield) -> Bool
     
-    @objc optional func textFieldDidEndEditing(_ textField: LimitedTextfield)
+    func textFieldDidEndEditing(_ textField: LimitedTextfield)
     
     @available(iOS 10.0, *)
-    @objc optional func textFieldDidEndEditing(_ textField: LimitedTextfield, reason: UITextField.DidEndEditingReason)
+    func textFieldDidEndEditing(_ textField: LimitedTextfield, reason: UITextField.DidEndEditingReason)
     
     @available(iOS 13.0, *)
-    @objc optional func textFieldDidChangeSelection(_ textField: LimitedTextfield)
+    func textFieldDidChangeSelection(_ textField: LimitedTextfield)
     
-    @objc optional func textFieldShouldClear(_ textField: LimitedTextfield) -> Bool
+    func textFieldShouldClear(_ textField: LimitedTextfield) -> Bool
     
-    @objc optional func textFieldShouldReturn(_ textField: LimitedTextfield) -> Bool
+    func textFieldShouldReturn(_ textField: LimitedTextfield) -> Bool
+    
+    func textField(_ textField: LimitedTextfield, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool
+}
+
+extension LimitedTextfieldDelegate {
+    func textFieldShouldBeginEditing(_ textField: LimitedTextfield) -> Bool { return true }
+    
+    func textFieldDidBeginEditing(_ textField: LimitedTextfield) { }
+    
+    func textFieldShouldEndEditing(_ textField: LimitedTextfield) -> Bool { return true }
+    
+    func textFieldDidEndEditing(_ textField: LimitedTextfield) { }
+    
+    @available(iOS 10.0, *)
+    func textFieldDidEndEditing(_ textField: LimitedTextfield, reason: UITextField.DidEndEditingReason) { }
+    
+    @available(iOS 13.0, *)
+    func textFieldDidChangeSelection(_ textField: LimitedTextfield) { }
+    
+    func textFieldShouldClear(_ textField: LimitedTextfield) -> Bool { return true }
+    
+    func textFieldShouldReturn(_ textField: LimitedTextfield) -> Bool { return true }
+    
+    func textField(_ textField: LimitedTextfield, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool { return true }
 }
 
 
 
-@objc public final class LimitedTextfield: UITextField {
+public final class LimitedTextfield: UITextField {
     
     deinit {
         NotificationCenter.default.removeObserver(self, name: UITextField.textDidChangeNotification, object: nil)
     }
     
     /// 代理。在外界请使用`LimitedTextfieldDelegate`代理
-    @objc public weak var limitedTextfield: LimitedTextfieldDelegate?
+    public weak var limitedTextfield: LimitedTextfieldDelegate?
     
     /// 最大长度。默认为0，表示不限制长度
-    @objc public var maxLength: Int = 0 {
+    public var maxLength: Int = 0 {
         didSet {
             update()
         }
     }
     
-    @objc public init() {
+    public var generalPolicy: LimitedPolicy = .containsAll {
+        didSet {
+            
+        }
+    }
+    
+    public var decimalPolicy: LimitedDecimalPolicy? {
+        didSet {
+            
+        }
+    }
+    
+    
+    
+    public init() {
         super.init(frame: .zero)
         initUI()
         setupUI()
@@ -103,7 +141,13 @@ extension LimitedTextfield {
             return
         }
         
-        guard let text = text else { return }
+        guard var text = text else { return }
+        guard text.count > maxLength else { return }
+        
+        
+        
+        
+        
         var sText = text as NSString
         if text.count <= maxLength {
             return
@@ -131,40 +175,61 @@ extension LimitedTextfield {
 
 extension LimitedTextfield: UITextFieldDelegate {
     public func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-        return self.limitedTextfield?.textFieldShouldBeginEditing?(self) ?? true
+        return self.limitedTextfield?.textFieldShouldBeginEditing(self) ?? true
     }
     
     public func textFieldDidBeginEditing(_ textField: UITextField) {
-        self.limitedTextfield?.textFieldDidBeginEditing?(self)
+        self.limitedTextfield?.textFieldDidBeginEditing(self)
     }
     
     public func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
-        self.limitedTextfield?.textFieldShouldEndEditing?(self) ?? true
+        self.limitedTextfield?.textFieldShouldEndEditing(self) ?? true
     }
     
     public func textFieldDidEndEditing(_ textField: UITextField) {
-        self.limitedTextfield?.textFieldDidEndEditing?(self)
+        self.limitedTextfield?.textFieldDidEndEditing(self)
     }
     
     @available(iOS 10.0, *)
     public func textFieldDidEndEditing(_ textField: UITextField, reason: UITextField.DidEndEditingReason) {
-        self.limitedTextfield?.textFieldDidEndEditing?(self, reason: reason)
+        self.limitedTextfield?.textFieldDidEndEditing(self, reason: reason)
     }
     
     @available(iOS 13.0, *)
     public func textFieldDidChangeSelection(_ textField: UITextField) {
-        self.limitedTextfield?.textFieldDidChangeSelection?(self)
+        self.limitedTextfield?.textFieldDidChangeSelection(self)
     }
     
     public func textFieldShouldClear(_ textField: UITextField) -> Bool {
-        return self.limitedTextfield?.textFieldShouldClear?(self) ?? true
+        return self.limitedTextfield?.textFieldShouldClear(self) ?? true
     }
     
     public func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        return self.limitedTextfield?.textFieldShouldReturn?(self) ?? true
+        return self.limitedTextfield?.textFieldShouldReturn(self) ?? true
     }
     
     public func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if let limitedTextfield = limitedTextfield {
+            return limitedTextfield.textField(self, shouldChangeCharactersIn: range, replacementString: string)
+        }
+        
+        if let decimalPolicy = decimalPolicy {
+            switch decimalPolicy {
+                case .policy1(let integerPartLength, let decimalPartLength, let unsigned):
+                    print(1)
+                case .policy2(let totalLength, let unsigned):
+                    print("2")
+            }
+        } else {
+            if generalPolicy.contains(.containsAll) {
+                
+            } else {
+                if generalPolicy.contains(.chinese) {
+                    
+                }
+                
+            }
+        }
         return true
     }
 }
