@@ -9,6 +9,9 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -16,9 +19,11 @@ class ViewController: UIViewController {
         self.view.backgroundColor = .white
         
         
-        let textField = LimitedTextfield()
-        textField.maxLength = 10
+        var textField = UITextField()
+        textField.limited.maxLength = 5
+        textField.limited.generalPolicy = .all
         textField.backgroundColor = .orange
+        textField.delegate = self
         view.addSubview(textField)
         
         textField.frame = CGRect(x: 20, y: 100, width: 300, height: 40)
@@ -29,7 +34,7 @@ class ViewController: UIViewController {
 //        let string = "3️⃣"
 //        let string = "➒"
 //        let string = "3"
-        let string = "☺️"
+//        let string = "☺️"
         
 //        let count = string.count
 //        let length = (string as NSString).length
@@ -69,23 +74,20 @@ class ViewController: UIViewController {
 //        print(range)
         
         
-        print("------------------------------------")
-        for scalar in string.unicodeScalars {
-            print("value:\(scalar.value) - isEmoji:\(scalar.properties.isEmoji) - isEmojiPresentation:\(scalar.properties.isEmojiPresentation) - isEmojiModifier:\(scalar.properties.isEmojiModifier) - isEmojiModifierBase:\(scalar.properties.isEmojiModifierBase) - isJoinControl:\(scalar.properties.isJoinControl) - isVariationSelector:\(scalar.properties.isVariationSelector) - description:\(scalar.description)")
-        }
-        print(string.containsEmoji)
-        print(string.emojis)
-        
-        
-        print("------------------------------------")
-        //let numberString = "0123456789"
-//        let numberString = "劉"
-        let numberString = "軍"
-        
-        print(numberString.containsChinese)
-        
-        
-        
+//        print("------------------------------------")
+//        for scalar in string.unicodeScalars {
+//            print("value:\(scalar.value) - isEmoji:\(scalar.properties.isEmoji) - isEmojiPresentation:\(scalar.properties.isEmojiPresentation) - isEmojiModifier:\(scalar.properties.isEmojiModifier) - isEmojiModifierBase:\(scalar.properties.isEmojiModifierBase) - isJoinControl:\(scalar.properties.isJoinControl) - isVariationSelector:\(scalar.properties.isVariationSelector) - description:\(scalar.description)")
+//        }
+//        print(string.containsEmoji)
+//        print(string.emojis)
+//
+//
+//        print("------------------------------------")
+//        //let numberString = "0123456789"
+////        let numberString = "劉"
+//        let numberString = "軍"
+//
+//        print(numberString.containsChinese)
         
     }
 
@@ -93,9 +95,9 @@ class ViewController: UIViewController {
 }
 
 
-//extension ViewController: LimitedTextfieldDelegate {
-//
-//
-//
-//}
+extension ViewController: UITextFieldDelegate {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        return textField.limited.check(shouldChangeCharactersIn: range, replacementString: string)
+    }
+}
 
