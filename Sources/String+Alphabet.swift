@@ -28,15 +28,35 @@ extension String {
     internal var containsOnlyUppercaseAlphabet: Bool {
         return !isEmpty && !contains { !$0.isUppercaseAlphabet }
     }
+    
+    /// 筛选出字符串中小写字母，并组成一个新的字符串
+    internal var lowercaseAlphabetString: String {
+        return lowercaseAlphabets.map { String($0) }.reduce("", +)
+    }
+    
+    /// 筛选出字符串中小写集合
+    internal var lowercaseAlphabets: [Character] {
+        return filter { $0.isLowercaseAlphabet }
+    }
+    
+    /// 筛选出字符串中大写字母，并组成一个新的字符串
+    internal var uppercaseAlphabetString: String {
+        return uppercaseAlphabets.map { String($0) }.reduce("", +)
+    }
+    
+    /// 筛选出字符串中大写集合
+    internal var uppercaseAlphabets: [Character] {
+        return filter { $0.isUppercaseAlphabet }
+    }
 }
 
 extension Character {
-    fileprivate var isLowercaseAlphabet: Bool {
+    internal var isLowercaseAlphabet: Bool {
         guard let firstScalar = unicodeScalars.first else { return false }
         return firstScalar.value >= 97 && firstScalar.value <= 122
     }
     
-    fileprivate var isUppercaseAlphabet: Bool {
+    internal var isUppercaseAlphabet: Bool {
         guard let firstScalar = unicodeScalars.first else { return false }
         return firstScalar.value >= 65 && firstScalar.value <= 90
     }

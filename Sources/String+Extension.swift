@@ -9,6 +9,7 @@ import Foundation
 
 extension String {
     internal static let dot = "."
+    internal static let zero = "0"
     
     internal var containsSigned: Bool {
         return contains("+") || contains("-")

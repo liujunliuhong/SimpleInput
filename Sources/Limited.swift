@@ -8,20 +8,19 @@
 import Foundation
 import UIKit
 
-public struct LimitedWrapper<Base> {
-    public let base: Base
-    public init(_ base: Base) {
-        self.base = base
-    }
+
+private struct AssociatedKeys {
+    static var limitedInput = "com.galaxy.limitedInput.key"
 }
 
-public protocol LimitedCompatible {}
-
-extension LimitedCompatible {
-    public var limited: LimitedWrapper<Self> {
-        get { return LimitedWrapper(self) }
-        set { }
+extension UITextField {
+    public var limitedInput: LimitedInput {
+        if let l = objc_getAssociatedObject(self, &AssociatedKeys.limitedInput) as? LimitedInput {
+            return l
+        } else {
+            let l = LimitedInput(textField: self)
+            objc_setAssociatedObject(self, &AssociatedKeys.limitedInput, l, .OBJC_ASSOCIATION_RETAIN)
+            return l
+        }
     }
 }
-
-extension UITextField: LimitedCompatible { }

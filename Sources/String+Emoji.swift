@@ -30,23 +30,23 @@ extension String {
         return filter { $0.isEmoji }
     }
     
-    /// 筛选出字符串中表情标量集合
-    internal var emojiScalars: [UnicodeScalar] {
-        return emojis.flatMap { $0.unicodeScalars }
-    }
+//    /// 筛选出字符串中表情标量集合
+//    internal var emojiScalars: [UnicodeScalar] {
+//        return emojis.flatMap { $0.unicodeScalars }
+//    }
 }
 
 extension Character {
-    fileprivate var isSimpleEmoji: Bool {
+    internal var isSimpleEmoji: Bool {
         guard let firstScalar = unicodeScalars.first else { return false }
         return firstScalar.properties.isEmoji && firstScalar.value > 0x238C
     }
     
-    fileprivate var isCombinedIntoEmoji: Bool {
+    internal var isCombinedIntoEmoji: Bool {
         return unicodeScalars.count > 1 && unicodeScalars.first?.properties.isEmoji ?? false
     }
     
-    fileprivate var isEmoji: Bool {
+    internal var isEmoji: Bool {
         return isSimpleEmoji || isCombinedIntoEmoji
     }
 }
