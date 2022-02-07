@@ -22,7 +22,7 @@ class ViewController: UIViewController {
         textField.limitedInput.maxLength = 5
         textField.limitedInput.generalPolicy = [.chinese, .emoji]
         //textField.limitedInput.decimalPolicy = .policy1(integerPartLength: 3, decimalPartLength: 5, allowSigned: true)
-        textField.limitedInput.decimalPolicy = .policy2(totalLength: 0, allowSigned: false)
+        //textField.limitedInput.decimalPolicy = .policy2(totalLength: 0, allowSigned: false)
         textField.backgroundColor = .orange
         view.addSubview(textField)
         

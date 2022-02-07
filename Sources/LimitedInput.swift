@@ -16,9 +16,9 @@ public class LimitedInput {
         NotificationCenter.default.removeObserver(self)
     }
     
-    public weak var textField: UITextField?
-    public init(textField: UITextField) {
-        self.textField = textField
+    public weak var currentInput: UITextInput?
+    public init(currentInput: UITextInput) {
+        self.currentInput = currentInput
     }
     
     /// 最大长度
@@ -45,9 +45,37 @@ public class LimitedInput {
         }
     }
     
+    private var _placeholder: String?
+    public var placeholder: String? {
+        set {
+            _placeholder = newValue
+        }
+        get {
+            return _placeholder
+        }
+    }
+    
+    public var placeholderFont: UIFont {
+        get {
+            
+        }
+        set {
+            
+        }
+    }
+    
+    public var placeholderColor: UIColor? {
+        get {
+            
+        }
+        set {
+            
+        }
+    }
+    
     /// 获取输入框的内容
     public var text: String? {
-        guard var sText = textField?.text else { return nil }
+        guard var sText = getText() else { return nil }
         if let _ = decimalPolicy {
             while true {
                 if sText.contains(String.dot) {
@@ -69,18 +97,33 @@ public class LimitedInput {
 extension LimitedInput {
     private func startObserver() {
         updateInput()
-        if hasAddObserver {
-            return
+        if hasAddObserver { return }
+        if let _ = currentInput as? UITextField {
+            NotificationCenter.default.addObserver(self, selector: #selector(textFieldDidChange(noti:)), name: UITextField.textDidChangeNotification, object: nil)
+            hasAddObserver = true
+        } else if let _ = currentInput as? UITextView {
+            NotificationCenter.default.addObserver(self, selector: #selector(textViewDidChange(noti:)), name: UITextView.textDidChangeNotification, object: nil)
+            hasAddObserver = true
         }
-        NotificationCenter.default.addObserver(self, selector: #selector(updateInput), name: UITextField.textDidChangeNotification, object: nil)
-        hasAddObserver = true
     }
 }
 
 extension LimitedInput {
-    @objc private func updateInput() {
-        guard let textField = textField else { return }
-        if textField.hasMarkedText {
+    @objc private func textFieldDidChange(noti: Notification) {
+        guard let textField = currentInput as? UITextField else { return }
+        guard let s = noti.object as? UITextField, s == textField else { return }
+        updateInput()
+    }
+    
+    @objc private func textViewDidChange(noti: Notification) {
+        guard let textView = currentInput as? UITextView else { return }
+        guard let s = noti.object as? UITextView, s == textView else { return }
+        updateInput()
+    }
+    
+    private func updateInput() {
+        guard let currentInput = currentInput else { return }
+        if currentInput.hasMarkedText {
             // 有高亮文字的存在的时候，不做截取
             return
         }
@@ -94,8 +137,8 @@ extension LimitedInput {
 
 extension LimitedInput {
     func checkGeneral(generalPolicy: LimitedPolicy) {
-        guard let textField = textField else { return }
-        guard var sText = textField.text else { return }
+        guard let currentInput = currentInput else { return }
+        guard var sText = getText() else { return }
         if generalPolicy.contains(.containsAll) { return }
         
         sText = sText.filter { c -> Bool in
@@ -117,26 +160,29 @@ extension LimitedInput {
             }
             return res
         }
-        textField.text = sText
-        
-        guard var sText = textField.text else { return }
+        setText(text: sText)
+        guard var sText = getText() else { return }
         
         if maxLength <= 0 { return }
         guard sText.count > maxLength else { return }
         
         sText = String(sText[sText.startIndex..<sText.index(sText.startIndex, offsetBy: Int(maxLength))])
         
-        let oldSelectedTextRange = textField.selectedTextRange
+        let oldSelectedTextRange = currentInput.selectedTextRange
         
-        textField.text = sText
+        if let textField = currentInput as? UITextField {
+            textField.text = sText
+        } else if let textView = currentInput as? UITextView {
+            textView.text = sText
+        }
         
-        textField.selectedTextRange = oldSelectedTextRange
+        currentInput.selectedTextRange = oldSelectedTextRange
     }
     
     
     private func checkDecimal(decimalPolicy: LimitedDecimalPolicy) {
-        guard let textField = textField else { return }
-        guard let sText = textField.text, sText.count > 0 else { return }
+        guard let _ = currentInput else { return }
+        guard let sText = getText(), sText.count > 0 else { return }
         //
         var allowSigned: Bool
         switch decimalPolicy {
@@ -205,20 +251,40 @@ extension LimitedInput {
         switch decimalPolicy {
             case .policy1(let integerPartLength, let decimalPartLength, _):
                 if integerPartLength <= 0 {
-                    textField.text = nil
+                    setText(text: nil)
                 } else {
                     if decimalPartLength > 0 && hasDot {
-                        textField.text = prefix + before + String.dot + after
+                        setText(text: prefix + before + String.dot + after)
                     } else {
-                        textField.text = prefix + before
+                        setText(text: prefix + before)
                     }
                 }
             case .policy2(_, _):
                 if hasDot {
-                    textField.text = prefix + before + String.dot + after
+                    setText(text: prefix + before + String.dot + after)
                 } else {
-                    textField.text = prefix + before
+                    setText(text: prefix + before)
                 }
+        }
+    }
+}
+
+extension LimitedInput {
+    private func getText() -> String? {
+        var currentText: String?
+        if let textField = currentInput as? UITextField {
+            currentText = textField.text
+        } else if let textView = currentInput as? UITextView {
+            currentText = textView.text
+        }
+        return currentText
+    }
+    
+    private func setText(text: String?) {
+        if let textField = currentInput as? UITextField {
+            textField.text = text
+        } else if let textView = currentInput as? UITextView {
+            textView.text = text
         }
     }
 }

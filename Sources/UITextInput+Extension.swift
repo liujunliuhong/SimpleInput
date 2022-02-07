@@ -1,14 +1,14 @@
 //
-//  UITextField+Extension.swift
+//  UITextInput+Extension.swift
 //  LimitedInput
 //
-//  Created by jun on 2022/02/07.
+//  Created by galaxy on 2022/2/7.
 //
 
 import Foundation
 import UIKit
 
-extension UITextField {
+extension UITextInput {
     internal var markedTextNSRange: NSRange? {
         guard let markedTextRange = markedTextRange else { return nil }
         let markedTextRangeLocation = offset(from: beginningOfDocument, to: markedTextRange.start)
