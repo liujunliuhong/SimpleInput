@@ -30,10 +30,10 @@ extension String {
         return filter { $0.isEmoji }
     }
     
-//    /// 筛选出字符串中表情标量集合
-//    internal var emojiScalars: [UnicodeScalar] {
-//        return emojis.flatMap { $0.unicodeScalars }
-//    }
+    /// 筛选出字符串中表情标量集合
+    internal var emojiScalars: [UnicodeScalar] {
+        return emojis.flatMap { $0.unicodeScalars }
+    }
 }
 
 extension Character {

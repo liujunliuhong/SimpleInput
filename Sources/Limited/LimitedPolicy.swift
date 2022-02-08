@@ -34,7 +34,7 @@ public struct LimitedPolicy: OptionSet {
 
 
 /// 小数策略
-public enum LimitedDecimalPolicy {
+public enum DecimalPolicy {
     /// 策略1
     /// integerPartLength: 整数部分长度
     /// decimalPartLength: 小数部分长度
@@ -45,4 +45,17 @@ public enum LimitedDecimalPolicy {
     /// totalLength: 总长度(整数部分长度+小数部分长度)
     /// allowSigned: 是否允许出现符号(`+`或者`-`)
     case policy2(totalLength: UInt, allowSigned: Bool)
+    
+    /// 策略3
+    /// integerPartLength: 整数部分长度
+    /// decimalReservedValidDigitLength: 小数部分有效位数长度
+    /// maximumDecimalPartLength: 小数位数的最大长度
+    /// `10.00001245`保留`5`为有效位数，最多保留`2`位小数 => 10.00`
+    /// `19.12`保留`5`为有效位数，最多保留`1`位小数 => `19.1`
+    /// `19.12`保留`2`为有效位数，最多保留`1`位小数 => `19.1`
+    /// `10.123456`保留`5`为有效位数，最多保留`2`位小数 => `10.23`
+    /// `10.123456`保留`2`为有效位数，最多保留`5`位小数 => `10.12`
+    /// `10.00001245`保留`2`为有效位数，最多保留`6`位小数 => `10.000012`
+    /// `10`保留`2`为有效位数，最多保留`6`位小数 => `10.00`
+    case policy3(integerPartLength: UInt, decimalReservedValidDigitLength: UInt, maximumDecimalPartLength: UInt, allowSigned: Bool)
 }
