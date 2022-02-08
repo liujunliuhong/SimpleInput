@@ -43,6 +43,9 @@ public class LimitedViewController: UIViewController {
         textField.limitedInput.processChangeClosure { text in
             print("实时文本:\(text ?? "")")
         }
+        textField.limitedInput.processRealChangeClosure { text in
+            print("真实文本:\(text ?? "")")
+        }
     }
     
     public override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {

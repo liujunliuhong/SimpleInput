@@ -1,13 +1,13 @@
 //
-//  PerfectInputUITests.swift
-//  PerfectInputUITests
+//  SimpleInputUITests.swift
+//  SimpleInputUITests
 //
 //  Created by galaxy on 2022/2/8.
 //
 
 import XCTest
 
-class PerfectInputUITests: XCTestCase {
+class SimpleInputUITests: XCTestCase {
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.

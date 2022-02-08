@@ -1,6 +1,6 @@
 //
 //  AppDelegate.swift
-//  PerfectInput
+//  SimpleInput
 //
 //  Created by galaxy on 2022/2/8.
 //
@@ -22,4 +22,3 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
 }
-

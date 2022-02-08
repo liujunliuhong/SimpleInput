@@ -15,6 +15,7 @@ public class LimitedInput {
     }
     
     private var changeClosures:[(String?)->()] = []
+    private var realChangeClosures:[(String?)->()] = []
     private var hasAddObserver = false
     private var _object: _Object?
     
@@ -50,17 +51,17 @@ public class LimitedInput {
         }
     }
     
-    /// 获取输入框的内容
+    /// 获取输入框的内容(已对小数策略做了处理)
     public var text: String? {
         guard var sText = getText() else { return nil }
         // 针对小数策略，做特殊处理
-        if let decimalPolicy = decimalPolicy {
-            // 首先去除尾部的0和小数点
+        if let _ = decimalPolicy {
+            // 去除尾部的0和小数点，比如输入框的内容为`0.120`或者`5.`
             let groups = sText.components(separatedBy: String.dot)
             if groups.count == 2 {
                 var s = groups[1]
                 while true {
-                    if s.hasPrefix(String.zero) {
+                    if s.hasSuffix(String.zero) {
                         s = String(s.prefix(s.count - 1))
                     } else {
                         break
@@ -72,6 +73,22 @@ public class LimitedInput {
                     sText = groups[0] + String.dot + s
                 }
             }
+            if sText.hasSignedPrefix {
+                // 针对输入框只有`+`或者`-`的情况
+                let after = String(sText.suffix(sText.count - 1))
+                if after.count <= 0 {
+                    return nil
+                }
+            }
+        }
+        return sText
+    }
+    
+    /// 获取真实文本内容(针对小数策略做了特殊处理)
+    public var realText: String? {
+        guard let sText = text else { return nil }
+        // 针对小数策略，做特殊处理
+        if let decimalPolicy = decimalPolicy {
             // 拆分单元
             var prefix = ""
             var afterText = sText
@@ -184,8 +201,13 @@ public class LimitedInput {
         } else if let generalPolicy = generalPolicy {
             checkGeneral(generalPolicy: generalPolicy)
         }
-        for f in changeClosures {
-            f(text)
+        DispatchQueue.main.async {
+            for f in self.changeClosures {
+                f(self.text)
+            }
+            for f in self.realChangeClosures {
+                f(self.realText)
+            }
         }
     }
     
@@ -194,10 +216,17 @@ public class LimitedInput {
             changeClosures.append(closure!)
         }
     }
+    
+    public func processRealChangeClosure(_ closure:((String?)->())?) {
+        if closure != nil {
+            realChangeClosures.append(closure!)
+        }
+    }
 }
 
 extension LimitedInput {
     private func startObserver() {
+        updateInput()
         guard let _object = self._object else { return }
         if hasAddObserver { return }
         // 将整个见天代码放在一个Block里面，这样设置，即使text赋值在之前，也能完美监听

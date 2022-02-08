@@ -1,13 +1,13 @@
 //
-//  PerfectInputUITestsLaunchTests.swift
-//  PerfectInputUITests
+//  SimpleInputUITestsLaunchTests.swift
+//  SimpleInputUITests
 //
 //  Created by galaxy on 2022/2/8.
 //
 
 import XCTest
 
-class PerfectInputUITestsLaunchTests: XCTestCase {
+class SimpleInputUITestsLaunchTests: XCTestCase {
 
     override class var runsForEachTargetApplicationUIConfiguration: Bool {
         true
