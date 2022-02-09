@@ -7,26 +7,26 @@
 #
 
 Pod::Spec.new do |spec|
-  spec.name                   = 'SimpleInput'
-  spec.homepage               = 'https://github.com/liujunliuhong/SimpleInput'
-  spec.source                 = { :git => 'https://github.com/liujunliuhong/SimpleInput.git', :tag => spec.version }
-  spec.version                = '0.0.1'
-  spec.summary                = 'Lightweight input control handling in Swift'
-  spec.license                = { :type => 'MIT', :file => 'LICENSE' }
-  spec.author                 = { 'liujunliuhong' => '1035841713@qq.com' }
-  spec.module_name            = 'SimpleInput'
-  spec.swift_version          = '5.0'
-  spec.platform               = :ios, '10.2'
-  spec.ios.deployment_target  = '10.2'
+  spec.name                   = "SimpleInput"
+  spec.homepage               = "https://github.com/liujunliuhong/SimpleInput"
+  spec.source                 = { :git => "https://github.com/liujunliuhong/SimpleInput.git", :tag => spec.version }
+  spec.version                = "0.0.1"
+  spec.summary                = "Lightweight input control handling in Swift"
+  spec.license                = { :type => "MIT", :file => "LICENSE" }
+  spec.author                 = { "liujunliuhong" => "1035841713@qq.com" }
+  spec.module_name            = "SimpleInput"
+  spec.swift_version          = "5.0"
+  spec.platform               = :ios, "10.2"
+  spec.ios.deployment_target  = "10.2"
   spec.requires_arc           = true
   spec.static_framework       = true
   
-  spec.subspec 'Limited' do |ss|
-    ss.source_files = 'Sources/Limited/*.swift'
+  spec.subspec "Limited" do |ss|
+    ss.source_files = "Sources/Limited/*.swift"
   end
 
-  spec.subspec 'Placeholder' do |ss|
-    ss.source_files = 'Sources/Placeholder/*.swift'
+  spec.subspec "Placeholder" do |ss|
+    ss.source_files = "Sources/Placeholder/*.swift"
   end
 
 end
