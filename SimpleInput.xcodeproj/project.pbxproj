@@ -33,6 +33,8 @@
 		8541777B27B2BC9A000FA7F6 /* LimitedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8541776B27B2BC9A000FA7F6 /* LimitedViewController.swift */; };
 		8541777C27B2BC9A000FA7F6 /* PlaceholderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8541776C27B2BC9A000FA7F6 /* PlaceholderViewController.swift */; };
 		9E868FE8DBCF5392898E7CAB /* Pods_SimpleInputTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2B994FF57496B834DA9F77E /* Pods_SimpleInputTests.framework */; };
+		BF113E8127B34D5B004F477C /* LimitedInput+Process.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF113E8027B34D5B004F477C /* LimitedInput+Process.swift */; };
+		BF113E8327B35381004F477C /* LimitedInput+Check.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF113E8227B35381004F477C /* LimitedInput+Check.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -87,6 +89,8 @@
 		8541776B27B2BC9A000FA7F6 /* LimitedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LimitedViewController.swift; sourceTree = "<group>"; };
 		8541776C27B2BC9A000FA7F6 /* PlaceholderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceholderViewController.swift; sourceTree = "<group>"; };
 		B2B994FF57496B834DA9F77E /* Pods_SimpleInputTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SimpleInputTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BF113E8027B34D5B004F477C /* LimitedInput+Process.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LimitedInput+Process.swift"; sourceTree = "<group>"; };
+		BF113E8227B35381004F477C /* LimitedInput+Check.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LimitedInput+Check.swift"; sourceTree = "<group>"; };
 		EC441596E4989630217D6A73 /* Pods_SimpleInput_SimpleInputUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SimpleInput_SimpleInputUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F5E1E3C16C1DFBC647AF1FD8 /* Pods-SimpleInputTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SimpleInputTests.debug.xcconfig"; path = "Target Support Files/Pods-SimpleInputTests/Pods-SimpleInputTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -195,6 +199,8 @@
 			children = (
 				8541776527B2BC9A000FA7F6 /* Limited.swift */,
 				8541775E27B2BC9A000FA7F6 /* LimitedInput.swift */,
+				BF113E8027B34D5B004F477C /* LimitedInput+Process.swift */,
+				BF113E8227B35381004F477C /* LimitedInput+Check.swift */,
 				8541776327B2BC9A000FA7F6 /* LimitedPolicy.swift */,
 				8541775F27B2BC9A000FA7F6 /* String+Number.swift */,
 				8541776027B2BC9A000FA7F6 /* String+Extension.swift */,
@@ -487,6 +493,7 @@
 				8541777927B2BC9A000FA7F6 /* Cell.swift in Sources */,
 				8541777627B2BC9A000FA7F6 /* Limited.swift in Sources */,
 				8541777A27B2BC9A000FA7F6 /* LimitedListViewController.swift in Sources */,
+				BF113E8327B35381004F477C /* LimitedInput+Check.swift in Sources */,
 				8541772A27B2BC05000FA7F6 /* AppDelegate.swift in Sources */,
 				8541777B27B2BC9A000FA7F6 /* LimitedViewController.swift in Sources */,
 				8541777027B2BC9A000FA7F6 /* String+Number.swift in Sources */,
@@ -495,6 +502,7 @@
 				8541776D27B2BC9A000FA7F6 /* PlaceholderTextView.swift in Sources */,
 				8541777227B2BC9A000FA7F6 /* String+Chinese.swift in Sources */,
 				8541777427B2BC9A000FA7F6 /* LimitedPolicy.swift in Sources */,
+				BF113E8127B34D5B004F477C /* LimitedInput+Process.swift in Sources */,
 				8541776E27B2BC9A000FA7F6 /* PlaceholderTextField.swift in Sources */,
 				8541777727B2BC9A000FA7F6 /* String+Emoji.swift in Sources */,
 			);

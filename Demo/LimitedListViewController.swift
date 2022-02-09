@@ -26,7 +26,11 @@ public class LimitedListViewController: UITableViewController {
                 Model(title: "金额输入(总共5位，不允许符号)", action: priceSet2),
                 Model(title: "金额输入(整数部分3位，保留2位有效位数，最多保留5位小数，允许符号)", action: priceSet3),
                 Model(title: "金额输入(整数部分3位，保留5位有效位数，最多保留2位小数，允许符号)", action: priceSet4),
-                Model(title: "金额输入(整数部分3位，保留2位有效位数，最多保留0位小数，允许符号)，此时输入不了小数", action: priceSet5),]
+                Model(title: "金额输入(整数部分3位，保留2位有效位数，最多保留0位小数，允许符号)，此时输入不了小数", action: priceSet5),
+                Model(title: "正则(只能输入中文)，且长度设置为5位", action: regexChineseInput),
+                Model(title: "正则(只能输入字母)，且长度设置为5位", action: regexAlphabetInput),
+                Model(title: "正则(手机号)", action: regexPhoneInput),
+                Model(title: "正则(以1开头，后面只能输入字母)，且长度设置为5位", action: regexComplexInput),]
     }()
     public override func viewDidLoad() {
         super.viewDidLoad()
@@ -129,5 +133,38 @@ extension LimitedListViewController {
         vc.label.text = "金额输入(整数部分3位，保留2位有效位数，最多保留0位小数，允许符号)，此时输入不了小数"
         vc.textField.limitedInput.decimalPolicy = .policy3(integerPartLength: 3, decimalReservedValidDigitLength: 2, maximumDecimalPartLength: 0, allowSigned: true)
         navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    private func regexChineseInput() {
+        let vc = LimitedViewController()
+        vc.label.text = "正则(只能输入中文)，且长度设置为5位"
+        vc.textField.limitedInput.regex = "[\\u4E00-\\u9FA5]"
+        vc.textField.limitedInput.maxLength = 5
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    private func regexAlphabetInput() {
+        let vc = LimitedViewController()
+        vc.label.text = "正则(只能输入字母)，且长度设置为5位"
+        vc.textField.limitedInput.regex = "[a-zA-Z]+"
+        vc.textField.limitedInput.maxLength = 5
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    private func regexPhoneInput() {
+        let vc = LimitedViewController()
+        vc.label.text = "正则(手机号)"
+        vc.textField.limitedInput.regex = "^1[3-9]{0,10}" // 以1开头，后面只能输入3-9中的某个数
+        vc.textField.limitedInput.maxLength = UInt.max
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    private func regexComplexInput() {
+        let vc = LimitedViewController()
+        vc.label.text = "正则(以1开头，后面只能输入字母)，且长度设置为5位"
+        vc.textField.limitedInput.regex = "^1[a-zA-Z]*"
+        vc.textField.limitedInput.maxLength = 5
+        navigationController?.pushViewController(vc, animated: true)
+        
     }
 }
