@@ -9,8 +9,8 @@
 Pod::Spec.new do |spec|
   spec.name                   = "SimpleInput"
   spec.homepage               = 'https://github.com/liujunliuhong/SimpleInput'
-  #spec.source                 = { :git => 'https://github.com/liujunliuhong/SimpleInput.git', :tag => "#{spec.version}" }
-  spec.source                 = { :path => 'Sources' }
+  spec.source                 = { :git => 'https://github.com/liujunliuhong/SimpleInput.git', :tag => "#{spec.version}" }
+  #spec.source                 = { :path => 'SimpleInput' }
   spec.version                = "0.0.1"
   spec.summary                = "Lightweight input control handling in Swift"
   spec.license                = { :type => 'MIT', :file => 'LICENSE' }
