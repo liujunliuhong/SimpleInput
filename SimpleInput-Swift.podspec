@@ -7,7 +7,7 @@
 #
 
 Pod::Spec.new do |spec|
-  spec.name                   = 'SimpleInput'
+  spec.name                   = 'SimpleInput-Swift'
   spec.version                = '0.0.1'
   spec.homepage               = 'https://github.com/liujunliuhong/SimpleInput'
   spec.source                 = { :git => 'https://github.com/liujunliuhong/SimpleInput.git', :tag => spec.version }

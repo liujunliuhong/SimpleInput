@@ -15,7 +15,7 @@
 ## 安装
 推荐使用`CocoaPods`
 ```
-pod 'SimpleInput'
+pod 'SimpleInput-Swift'
 ```
 
 ## 使用
