@@ -11,7 +11,8 @@ public class ViewController: UITableViewController {
     
     private var dataSource: [String] {
         return ["文本限制",
-                "输入占位"]
+                "输入占位",
+                "Limited和Placeholder组合使用"]
     }
     
     public override func viewDidLoad() {
@@ -50,6 +51,10 @@ public class ViewController: UITableViewController {
             navigationController?.pushViewController(vc, animated: true)
         } else if indexPath.row == 1 {
             let vc = PlaceholderViewController()
+            vc.navigationItem.title = dataSource[indexPath.row]
+            navigationController?.pushViewController(vc, animated: true)
+        } else if indexPath.row == 2 {
+            let vc = CombineViewController()
             vc.navigationItem.title = dataSource[indexPath.row]
             navigationController?.pushViewController(vc, animated: true)
         }

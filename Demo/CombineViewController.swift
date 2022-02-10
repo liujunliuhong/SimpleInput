@@ -1,23 +1,23 @@
 //
-//  PlaceholderViewController.swift
-//  LimitedInput
+//  CombineViewController.swift
+//  SimpleInput
 //
-//  Created by jun on 2022/02/08.
+//  Created by jun on 2022/02/10.
 //
 
 import UIKit
 import SnapKit
 
-
-public class PlaceholderViewController: UIViewController {
+public class CombineViewController: UIViewController {
 
     private lazy var textField: UITextField = {
         let textField = UITextField()
-        textField.placeholders.text = "请输入文本"
+        textField.placeholders.text = "我是占位(最大长度：10，通用策略：只能输入中文)"
         textField.placeholders.color = UIColor.cyan
-        textField.placeholders.font = UIFont.systemFont(ofSize: 30)
         textField.textColor = UIColor.red
-        textField.font = UIFont.systemFont(ofSize: 17)
+        textField.font = UIFont.systemFont(ofSize: 13)
+        textField.limitedInput.maxLength = 10
+        textField.limitedInput.generalPolicy = .chinese
         textField.layer.borderWidth = 1.0
         textField.layer.borderColor = UIColor.black.cgColor
         return textField
@@ -25,10 +25,11 @@ public class PlaceholderViewController: UIViewController {
     
     private lazy var textView: UITextView = {
         let textView = UITextView()
-        textView.placeholders.text = "请输入文本请输入文本请输入文本请输入文本请输入文本请输入文本请输入文本请输入文本请输入文本请输入文本请输入文本请输入文本请输入文本"
-        textView.placeholders.color = UIColor.brown.withAlphaComponent(0.3)
+        textView.placeholders.text = "我是占位(最大长度：15，小数策略：整数部分2位，小数部分3位，不能输入符号)"
         textView.font = UIFont.systemFont(ofSize: 17)
         textView.textColor = UIColor.orange
+        textView.limitedInput.maxLength = 15
+        textView.limitedInput.decimalPolicy = .policy1(integerPartLength: 2, decimalPartLength: 3, allowSigned: false)
         textView.layer.borderWidth = 1.0
         textView.layer.borderColor = UIColor.black.cgColor
         return textView

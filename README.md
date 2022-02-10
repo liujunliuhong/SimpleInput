@@ -1,9 +1,11 @@
 # SimpleInput
 &emsp;&emsp;在平时开发中，经常会对输入控件(`UITextField`、`UITextView`)做一些处理，比如设置占位符，设置允许输入的最大长度，设置只能输入数字等等。这些功能谈不上多复杂，你可能也做过一些简单的封装，不过你可能仅仅只是针对某些情况做的封装，不够全面。<br>
-&emsp;&emsp;我在开发中就是这个样子的，每次遇到类似功能都要去写很多重复代码。之前也曾想过写个轮子，把对输入控件的处理封装起来，但是由于需求千变万化，且功能不复杂，网上有很多类似代码，也就懒得写了。但是总这样下去也不行啊，所以自己动手，写了这个轮子。
+&emsp;&emsp;我在开发中就是这个样子的，每次遇到类似功能都要去写很多重复代码。之前也曾想过写个轮子，把对输入控件的处理封装起来，但是由于需求千变万化，且功能不复杂，网上有很多类似代码，也就懒得写了。但是总这样下去也不行啊，所以自己动手，写了这个轮子。<br>
+&emsp;&emsp;该轮子使用方法非常简单，相信你看一眼就会。<br>
+&emsp;&emsp;特别说明下，该轮子不支持OC，只支持Swift。如果你想在OC项目中使用，你需要写个Swift文件桥接，间接的使用该轮子。
 
 ## 主要功能
-- 支持`UITextField`和`UITextView`这两大输入控件的输入处理
+- 支持`UITextField`和`UITextView`这两大输入控件的输入处理。理论上也支持其他的输入控件，比如`YYTextView`，但是要支持`YYTextView`的话，需要导入三方库，我们用到`YYTextView`的时候很少并且我想让该轮子不依赖任何三方，所以如果你的项目用的是`YYTextView`，请自行想办法了😄
 - 支持设置占位符文字、占位符文本颜色、占位符文本字体、属性占位符
 - 支持设置最大长度
 - 支持中文、表情、数字、小写字母、大写字母的多种组合限制
@@ -21,26 +23,21 @@ pod 'SimpleInput-Swift'
 ## 使用
 ### 设置占位符
 针对`UITextField`来说，系统已经自带`placeholder`属性，但是不能自定义`placeholder`的颜色和字体，除非设置`attributedPlaceholder`<br>
-请使用`PlaceholderTextField`，`PlaceholderTextField`继承自`UITextField`
 
 ```
-let textField = PlaceholderTextField()
-textField.placeholder = "请输入文本"
-textField.placeholderTextColor = UIColor.cyan
-textField.textColor = UIColor.red
-textField.font = UIFont.systemFont(ofSize: 17)
+let textField = UITextField()
+textField.placeholders.text = "请输入文本" // 系统原有的placeholder属性将失效
+textField.placeholders.color = UIColor.cyan
+textField.placeholders.font = UIFont.systemFont(ofSize: 30)
 ```
 
 
 针对`UITextView`来说，系统没有提供`placeholder`属性。<br>
-请使用`PlaceholderTextView`，`PlaceholderTextView`继承自`UITextView`
 
 ```
-let textView = PlaceholderTextView()
-textView.placeholder = "请输入文本"
-textView.placeholderTextColor = UIColor.cyan
-textView.font = UIFont.systemFont(ofSize: 17)
-textView.textColor = UIColor.orange
+let textView = UITextView()
+textView.placeholders.text = "请输入文本"
+textView.placeholders.color = UIColor.brown.withAlphaComponent(0.3)
 ```
 
 ### 输入限制
@@ -48,12 +45,12 @@ textView.textColor = UIColor.orange
 
 如果你想设置最大长度
 ```
-textField.limitedInput.maxLength = 10 // 设置为0，表示无限长度
+textField.limitedInput.maxLength = 10 // 设置为0，表示无限长度，默认为0
 ```
 
 如果你想设置为只能输入中文，可以设置`generalPolicy`属性
 ```
-textField.limitedInput.generalPolicy = [.chinese]
+textField.limitedInput.generalPolicy = .chinese
 ```
 
 如果你想输入金额或者浮点类型，可以设置`decimalPolicy`属性

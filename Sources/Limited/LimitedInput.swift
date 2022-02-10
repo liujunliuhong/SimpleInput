@@ -178,6 +178,10 @@ extension LimitedInput {
 
 
 fileprivate class _Object: NSObject {
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
     private weak var input: LimitedInput?
     init(input: LimitedInput) {
         self.input = input

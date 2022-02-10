@@ -73,6 +73,8 @@ extension LimitedListViewController {
         vc.label.text = "允许输入所有字符，且长度设置为10位"
         vc.textField.limitedInput.generalPolicy = .all
         vc.textField.limitedInput.maxLength = 10
+        vc.textView.limitedInput.generalPolicy = .all
+        vc.textView.limitedInput.maxLength = 10
         navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -81,6 +83,8 @@ extension LimitedListViewController {
         vc.label.text = "只能输入数字，且长度设置为5位"
         vc.textField.limitedInput.generalPolicy = [.number]
         vc.textField.limitedInput.maxLength = 5
+        vc.textView.limitedInput.generalPolicy = [.number]
+        vc.textView.limitedInput.maxLength = 5
         navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -89,6 +93,8 @@ extension LimitedListViewController {
         vc.label.text = "只能输入表情，且长度设置为5位"
         vc.textField.limitedInput.generalPolicy = [.emoji]
         vc.textField.limitedInput.maxLength = 5
+        vc.textView.limitedInput.generalPolicy = [.emoji]
+        vc.textView.limitedInput.maxLength = 5
         navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -97,6 +103,8 @@ extension LimitedListViewController {
         vc.label.text = "只能输入中文和小写英文字母，且长度设置为5位"
         vc.textField.limitedInput.generalPolicy = [.chinese, .lowercaseAlphabet]
         vc.textField.limitedInput.maxLength = 5
+        vc.textView.limitedInput.generalPolicy = [.chinese, .lowercaseAlphabet]
+        vc.textView.limitedInput.maxLength = 5
         navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -104,6 +112,7 @@ extension LimitedListViewController {
         let vc = LimitedViewController()
         vc.label.text = "金额输入(整数部分5位，小数部分8位，允许符号)"
         vc.textField.limitedInput.decimalPolicy = .policy1(integerPartLength: 5, decimalPartLength: 8, allowSigned: true)
+        vc.textView.limitedInput.decimalPolicy = .policy1(integerPartLength: 5, decimalPartLength: 8, allowSigned: true)
         navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -111,6 +120,7 @@ extension LimitedListViewController {
         let vc = LimitedViewController()
         vc.label.text = "金额输入(总共5位，不允许符号)"
         vc.textField.limitedInput.decimalPolicy = .policy2(totalLength: 5, allowSigned: false)
+        vc.textView.limitedInput.decimalPolicy = .policy2(totalLength: 5, allowSigned: false)
         navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -118,6 +128,7 @@ extension LimitedListViewController {
         let vc = LimitedViewController()
         vc.label.text = "金额输入(整数部分3位，保留2位有效位数，最多保留5位小数，允许符号)"
         vc.textField.limitedInput.decimalPolicy = .policy3(integerPartLength: 3, decimalReservedValidDigitLength: 2, maximumDecimalPartLength: 5, allowSigned: true)
+        vc.textView.limitedInput.decimalPolicy = .policy3(integerPartLength: 3, decimalReservedValidDigitLength: 2, maximumDecimalPartLength: 5, allowSigned: true)
         navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -125,6 +136,7 @@ extension LimitedListViewController {
         let vc = LimitedViewController()
         vc.label.text = "金额输入(整数部分3位，保留5位有效位数，最多保留2位小数，允许符号)"
         vc.textField.limitedInput.decimalPolicy = .policy3(integerPartLength: 3, decimalReservedValidDigitLength: 5, maximumDecimalPartLength: 2, allowSigned: true)
+        vc.textView.limitedInput.decimalPolicy = .policy3(integerPartLength: 3, decimalReservedValidDigitLength: 5, maximumDecimalPartLength: 2, allowSigned: true)
         navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -132,6 +144,7 @@ extension LimitedListViewController {
         let vc = LimitedViewController()
         vc.label.text = "金额输入(整数部分3位，保留2位有效位数，最多保留0位小数，允许符号)，此时输入不了小数"
         vc.textField.limitedInput.decimalPolicy = .policy3(integerPartLength: 3, decimalReservedValidDigitLength: 2, maximumDecimalPartLength: 0, allowSigned: true)
+        vc.textView.limitedInput.decimalPolicy = .policy3(integerPartLength: 3, decimalReservedValidDigitLength: 2, maximumDecimalPartLength: 0, allowSigned: true)
         navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -140,6 +153,8 @@ extension LimitedListViewController {
         vc.label.text = "正则(只能输入中文)，且长度设置为5位"
         vc.textField.limitedInput.regex = "[\\u4E00-\\u9FA5]"
         vc.textField.limitedInput.maxLength = 5
+        vc.textView.limitedInput.regex = "[\\u4E00-\\u9FA5]"
+        vc.textView.limitedInput.maxLength = 5
         navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -148,6 +163,8 @@ extension LimitedListViewController {
         vc.label.text = "正则(只能输入字母)，且长度设置为5位"
         vc.textField.limitedInput.regex = "[a-zA-Z]+"
         vc.textField.limitedInput.maxLength = 5
+        vc.textView.limitedInput.regex = "[a-zA-Z]+"
+        vc.textView.limitedInput.maxLength = 5
         navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -155,7 +172,7 @@ extension LimitedListViewController {
         let vc = LimitedViewController()
         vc.label.text = "正则(手机号)"
         vc.textField.limitedInput.regex = "^1[3-9]{0,10}" // 以1开头，后面只能输入3-9中的某个数
-        vc.textField.limitedInput.maxLength = UInt.max
+        vc.textView.limitedInput.regex = "^1[3-9]{0,10}" // 以1开头，后面只能输入3-9中的某个数
         navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -164,6 +181,8 @@ extension LimitedListViewController {
         vc.label.text = "正则(以1开头，后面只能输入字母)，且长度设置为5位"
         vc.textField.limitedInput.regex = "^1[a-zA-Z]*"
         vc.textField.limitedInput.maxLength = 5
+        vc.textView.limitedInput.regex = "^1[a-zA-Z]*"
+        vc.textView.limitedInput.maxLength = 5
         navigationController?.pushViewController(vc, animated: true)
         
     }

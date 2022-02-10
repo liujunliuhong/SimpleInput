@@ -16,8 +16,6 @@
 		8541774127B2BC07000FA7F6 /* SimpleInputTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8541774027B2BC07000FA7F6 /* SimpleInputTests.swift */; };
 		8541774B27B2BC07000FA7F6 /* SimpleInputUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8541774A27B2BC07000FA7F6 /* SimpleInputUITests.swift */; };
 		8541774D27B2BC07000FA7F6 /* SimpleInputUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8541774C27B2BC07000FA7F6 /* SimpleInputUITestsLaunchTests.swift */; };
-		8541776D27B2BC9A000FA7F6 /* PlaceholderTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8541775B27B2BC9A000FA7F6 /* PlaceholderTextView.swift */; };
-		8541776E27B2BC9A000FA7F6 /* PlaceholderTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8541775C27B2BC9A000FA7F6 /* PlaceholderTextField.swift */; };
 		8541776F27B2BC9A000FA7F6 /* LimitedInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8541775E27B2BC9A000FA7F6 /* LimitedInput.swift */; };
 		8541777027B2BC9A000FA7F6 /* String+Number.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8541775F27B2BC9A000FA7F6 /* String+Number.swift */; };
 		8541777127B2BC9A000FA7F6 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8541776027B2BC9A000FA7F6 /* String+Extension.swift */; };
@@ -35,6 +33,9 @@
 		9E868FE8DBCF5392898E7CAB /* Pods_SimpleInputTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2B994FF57496B834DA9F77E /* Pods_SimpleInputTests.framework */; };
 		BF113E8127B34D5B004F477C /* LimitedInput+Process.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF113E8027B34D5B004F477C /* LimitedInput+Process.swift */; };
 		BF113E8327B35381004F477C /* LimitedInput+Check.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF113E8227B35381004F477C /* LimitedInput+Check.swift */; };
+		BFEF8C0127B4A718008FE851 /* CombineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFEF8C0027B4A718008FE851 /* CombineViewController.swift */; };
+		BFEF8C0327B4AADD008FE851 /* Placeholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFEF8C0227B4AADD008FE851 /* Placeholder.swift */; };
+		BFEF8C0527B4AB38008FE851 /* PlaceholderInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFEF8C0427B4AB38008FE851 /* PlaceholderInput.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -72,8 +73,6 @@
 		8541774627B2BC07000FA7F6 /* SimpleInputUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SimpleInputUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8541774A27B2BC07000FA7F6 /* SimpleInputUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleInputUITests.swift; sourceTree = "<group>"; };
 		8541774C27B2BC07000FA7F6 /* SimpleInputUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleInputUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		8541775B27B2BC9A000FA7F6 /* PlaceholderTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceholderTextView.swift; sourceTree = "<group>"; };
-		8541775C27B2BC9A000FA7F6 /* PlaceholderTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceholderTextField.swift; sourceTree = "<group>"; };
 		8541775E27B2BC9A000FA7F6 /* LimitedInput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LimitedInput.swift; sourceTree = "<group>"; };
 		8541775F27B2BC9A000FA7F6 /* String+Number.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Number.swift"; sourceTree = "<group>"; };
 		8541776027B2BC9A000FA7F6 /* String+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
@@ -91,6 +90,9 @@
 		B2B994FF57496B834DA9F77E /* Pods_SimpleInputTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SimpleInputTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF113E8027B34D5B004F477C /* LimitedInput+Process.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LimitedInput+Process.swift"; sourceTree = "<group>"; };
 		BF113E8227B35381004F477C /* LimitedInput+Check.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LimitedInput+Check.swift"; sourceTree = "<group>"; };
+		BFEF8C0027B4A718008FE851 /* CombineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombineViewController.swift; sourceTree = "<group>"; };
+		BFEF8C0227B4AADD008FE851 /* Placeholder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Placeholder.swift; sourceTree = "<group>"; };
+		BFEF8C0427B4AB38008FE851 /* PlaceholderInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceholderInput.swift; sourceTree = "<group>"; };
 		EC441596E4989630217D6A73 /* Pods_SimpleInput_SimpleInputUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SimpleInput_SimpleInputUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F5E1E3C16C1DFBC647AF1FD8 /* Pods-SimpleInputTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SimpleInputTests.debug.xcconfig"; path = "Target Support Files/Pods-SimpleInputTests/Pods-SimpleInputTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -188,8 +190,8 @@
 		8541775A27B2BC9A000FA7F6 /* Placeholder */ = {
 			isa = PBXGroup;
 			children = (
-				8541775B27B2BC9A000FA7F6 /* PlaceholderTextView.swift */,
-				8541775C27B2BC9A000FA7F6 /* PlaceholderTextField.swift */,
+				BFEF8C0227B4AADD008FE851 /* Placeholder.swift */,
+				BFEF8C0427B4AB38008FE851 /* PlaceholderInput.swift */,
 			);
 			path = Placeholder;
 			sourceTree = "<group>";
@@ -219,6 +221,7 @@
 				8541776A27B2BC9A000FA7F6 /* LimitedListViewController.swift */,
 				8541776B27B2BC9A000FA7F6 /* LimitedViewController.swift */,
 				8541776C27B2BC9A000FA7F6 /* PlaceholderViewController.swift */,
+				BFEF8C0027B4A718008FE851 /* CombineViewController.swift */,
 				8541776927B2BC9A000FA7F6 /* Cell.swift */,
 			);
 			path = Demo;
@@ -488,6 +491,7 @@
 			files = (
 				8541777827B2BC9A000FA7F6 /* ViewController.swift in Sources */,
 				8541777127B2BC9A000FA7F6 /* String+Extension.swift in Sources */,
+				BFEF8C0127B4A718008FE851 /* CombineViewController.swift in Sources */,
 				8541777327B2BC9A000FA7F6 /* UITextInput+Extension.swift in Sources */,
 				8541776F27B2BC9A000FA7F6 /* LimitedInput.swift in Sources */,
 				8541777927B2BC9A000FA7F6 /* Cell.swift in Sources */,
@@ -499,12 +503,12 @@
 				8541777027B2BC9A000FA7F6 /* String+Number.swift in Sources */,
 				8541777C27B2BC9A000FA7F6 /* PlaceholderViewController.swift in Sources */,
 				8541777527B2BC9A000FA7F6 /* String+Alphabet.swift in Sources */,
-				8541776D27B2BC9A000FA7F6 /* PlaceholderTextView.swift in Sources */,
+				BFEF8C0527B4AB38008FE851 /* PlaceholderInput.swift in Sources */,
 				8541777227B2BC9A000FA7F6 /* String+Chinese.swift in Sources */,
 				8541777427B2BC9A000FA7F6 /* LimitedPolicy.swift in Sources */,
 				BF113E8127B34D5B004F477C /* LimitedInput+Process.swift in Sources */,
-				8541776E27B2BC9A000FA7F6 /* PlaceholderTextField.swift in Sources */,
 				8541777727B2BC9A000FA7F6 /* String+Emoji.swift in Sources */,
+				BFEF8C0327B4AADD008FE851 /* Placeholder.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
