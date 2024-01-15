@@ -156,10 +156,10 @@ extension PlaceholderInput {
     
     internal func updateTextViewPlaholder() {
         guard let textView = currentInput as? UITextView else { return }
-        if textView.frame.size.width.isLessThanOrEqualTo(.zero) || textView.frame.size.height.isLessThanOrEqualTo(.zero) {
-            placeholderLabel.isHidden = true
-            return
-        }
+//        if textView.frame.size.width.isLessThanOrEqualTo(.zero) || textView.frame.size.height.isLessThanOrEqualTo(.zero) {
+//            placeholderLabel.isHidden = true
+//            return
+//        }
         
         if placeholderLabel.superview == nil {
             textView.addSubview(placeholderLabel)
